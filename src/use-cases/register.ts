@@ -20,10 +20,12 @@ export class RegisterUseCase {
 
     const password_hash = await hash(password, 10);
 
-    await this.prismaUsersRepository.create({
+    const user = await this.prismaUsersRepository.create({
       email,
       name,
       password: password_hash,
     });
+
+    return { user };
   }
 }
