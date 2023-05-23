@@ -1,9 +1,9 @@
 import { prisma } from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
-import { IUserRepository } from '../users-repository';
+import { IUsersRepository } from '../users-repository';
+import { ICreateUserDTO } from '@/dtos/create-user-dto';
 
-export class PrismaUsersRepository implements IUserRepository {
-  async create(data: Prisma.UserCreateInput) {
+export class PrismaUsersRepository implements IUsersRepository {
+  async create(data: ICreateUserDTO) {
     return prisma.user.create({
       data,
     });

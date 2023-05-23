@@ -1,15 +1,15 @@
-import { IUserRepository } from '@/repositories/users-repository';
 import { ResourceNotFoundError } from '../errors/resource-not-found-error';
+import { IUsersRepository } from '@/repositories/users-repository/users-repository';
 
 interface IAuthenticateUseCaseRequest {
-  userId: string;
+  user_id: string;
 }
 
 export class GetUserProfileUseCase {
-  constructor(private readonly userRepository: IUserRepository) {}
+  constructor(private readonly userRepository: IUsersRepository) {}
 
-  async execute({ userId }: IAuthenticateUseCaseRequest) {
-    const user = await this.userRepository.findUserById(userId);
+  async execute({ user_id }: IAuthenticateUseCaseRequest) {
+    const user = await this.userRepository.findUserById(user_id);
 
     if (!user) throw new ResourceNotFoundError();
 

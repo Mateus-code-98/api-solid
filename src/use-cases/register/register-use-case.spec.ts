@@ -1,8 +1,9 @@
-import { compare } from 'bcryptjs';
+import { compareSync } from 'bcryptjs';
 import { RegisterUseCase } from './register-use-case';
 import { expect, describe, it, beforeEach } from 'vitest';
 import { UserAlreadyExistsError } from '../errors/user-already-exists-error';
-import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
+import { IUsersRepository } from '@/repositories/users-repository/users-repository';
+import { InMemoryUsersRepository } from '@/repositories/users-repository/in-memory/in-memory-users-repository';
 
 const userExample = {
   name: 'John Doe',
@@ -10,33 +11,36 @@ const userExample = {
   password: '123456',
 };
 
-let usersRepository: InMemoryUsersRepository;
-let sut: RegisterUseCase;
+let usersRepository: IUsersRepository;
+let useCase: RegisterUseCase;
 
 describe('Register Use Case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository();
-    sut = new RegisterUseCase(usersRepository);
+    useCase = new RegisterUseCase(usersRepository);
   });
 
   it('should be able to register a new user', async () => {
-    const { user } = await sut.execute(userExample);
+    const { user } = await useCase.execute(userExample);
 
     expect(user).toHaveProperty('id');
   });
 
   it('should hash user password upon registration', async () => {
-    const { user } = await sut.execute(userExample);
+    const { user } = await useCase.execute(userExample);
 
-    const isPasswordCorrectlyHashed = await compare('123456', user.password);
+    const isPasswordCorrectlyHashed = compareSync(
+      userExample.password,
+      user.password
+    );
 
     expect(isPasswordCorrectlyHashed).toBe(true);
   });
 
   it('should not allow two users with the same email', async () => {
-    await sut.execute(userExample);
+    await useCase.execute(userExample);
 
-    await expect(sut.execute(userExample)).rejects.toBeInstanceOf(
+    await expect(useCase.execute(userExample)).rejects.toBeInstanceOf(
       UserAlreadyExistsError
     );
   });

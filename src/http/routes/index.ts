@@ -18,7 +18,7 @@ const routes: IRoutesProps[] = [
   },
   {
     method: 'get',
-    url: '/users/:userId',
+    url: '/users/:user_id',
     middlewares: [getUserProfileController],
   },
   { method: 'use', url: '', middlewares: [ExceptionHandler] },

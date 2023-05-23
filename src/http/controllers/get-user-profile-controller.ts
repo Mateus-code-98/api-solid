@@ -4,15 +4,15 @@ import { makeGetUserProfileUseCase } from '@/use-cases/factories/make-get-user-p
 
 export const getUserProfileController = async (req: Request, res: Response) => {
   const getUserProfileParamsSchema = z.object({
-    userId: z.string().uuid(),
+    user_id: z.string().uuid(),
   });
 
-  const { userId } = getUserProfileParamsSchema.parse(req.params);
+  const { user_id } = getUserProfileParamsSchema.parse(req.params);
 
   const getUserProfileUseCase = makeGetUserProfileUseCase();
 
   await getUserProfileUseCase.execute({
-    userId,
+    user_id,
   });
 
   return res.status(200).send();

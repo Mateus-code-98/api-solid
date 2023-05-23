@@ -1,8 +1,9 @@
-import { hash } from 'bcryptjs';
+import { hashSync } from 'bcryptjs';
 import { expect, describe, it, beforeEach } from 'vitest';
 import { GetUserProfileUseCase } from './get-user-profile-use-case';
 import { ResourceNotFoundError } from '../errors/resource-not-found-error';
-import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository';
+import { IUsersRepository } from '@/repositories/users-repository/users-repository';
+import { InMemoryUsersRepository } from '@/repositories/users-repository/in-memory/in-memory-users-repository';
 
 const userExample = {
   name: 'John Doe',
@@ -10,32 +11,32 @@ const userExample = {
   password: '123456',
 };
 
-let usersRepository: InMemoryUsersRepository;
-let sut: GetUserProfileUseCase;
+let usersRepository: IUsersRepository;
+let useCase: GetUserProfileUseCase;
 
 describe('GetUserProfile Use Case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository();
-    sut = new GetUserProfileUseCase(usersRepository);
+    useCase = new GetUserProfileUseCase(usersRepository);
   });
 
   it('should be able to get user profile', async () => {
-    userExample.password = await hash(userExample.password, 10);
+    userExample.password = hashSync(userExample.password, 10);
 
-    const { id: userId } = await usersRepository.create(userExample);
+    const { id: user_id, name } = await usersRepository.create(userExample);
 
-    const { user } = await sut.execute({ userId });
+    const { user } = await useCase.execute({ user_id });
 
-    expect(user.id).toEqual(userId);
-    expect(user.name).toEqual(userExample.name);
+    expect(user.id).toEqual(user_id);
+    expect(user.name).toEqual(name);
   });
 
   it('should not be able to get user profile with invalid id', async () => {
-    userExample.password = await hash(userExample.password, 10);
+    userExample.password = hashSync(userExample.password, 10);
 
-    const { id: userId } = await usersRepository.create(userExample);
+    const { id: user_id } = await usersRepository.create(userExample);
 
-    expect(sut.execute({ userId: userId + '1' })).rejects.toBeInstanceOf(
+    expect(useCase.execute({ user_id: user_id + '1' })).rejects.toBeInstanceOf(
       ResourceNotFoundError
     );
   });
