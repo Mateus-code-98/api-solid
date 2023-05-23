@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { Request, Response } from 'express';
-import { RegisterUseCase } from '../../use-cases/register';
-import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
+import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use.case';
 
 export const registerController = async (req: Request, res: Response) => {
   const registerBodySchema = z.object({
@@ -12,9 +11,7 @@ export const registerController = async (req: Request, res: Response) => {
 
   const { name, email, password } = registerBodySchema.parse(req.body);
 
-  const prisamUsersRepository = new PrismaUsersRepository();
-
-  const registerUseCase = new RegisterUseCase(prisamUsersRepository);
+  const registerUseCase = makeRegisterUseCase();
 
   await registerUseCase.execute({
     name,

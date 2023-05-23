@@ -1,6 +1,6 @@
 import { env } from '@/env';
 import { ZodError } from 'zod';
-import { AppError } from '../errors/AppError';
+import { AppError } from '../../errors/app-error';
 import { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 
 export const ExceptionHandler = (

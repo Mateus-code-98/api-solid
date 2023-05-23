@@ -14,4 +14,10 @@ export class PrismaUsersRepository implements IUserRepository {
       where: { email },
     });
   }
+
+  async findUserById(id: string) {
+    return prisma.user.findUnique({
+      where: { id },
+    });
+  }
 }
