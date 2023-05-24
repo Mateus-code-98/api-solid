@@ -1,4 +1,3 @@
-import { hashSync } from 'bcryptjs';
 import { randomUUID } from 'crypto';
 
 interface IConstructorParams {
@@ -6,6 +5,7 @@ interface IConstructorParams {
   email: string;
   password: string;
 }
+
 export class User {
   public readonly id: string;
   public name: string;

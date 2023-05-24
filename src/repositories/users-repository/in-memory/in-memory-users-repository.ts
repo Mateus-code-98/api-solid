@@ -6,11 +6,11 @@ export class InMemoryUsersRepository implements IUsersRepository {
   public users: User[] = [];
 
   async create({ email, name, password }: ICreateUserDTO) {
-    const user = new User({ email, name, password });
+    const userInstance = new User({ email, name, password });
 
-    this.users.push(user);
+    this.users.push(userInstance);
 
-    return user;
+    return userInstance;
   }
 
   async findUserByEmail(email: string) {
