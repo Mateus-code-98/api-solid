@@ -1,10 +1,11 @@
 import dayjs from 'dayjs';
 import { CheckIn } from '@/entities/CheckIn';
+import { ITENS_PER_PAGE } from '@/utils/constants';
 import { ICheckInRepository } from '../check-in-repository';
 import { ICreateCheckInDTO } from '@/dtos/create-check-in-dto';
+import { ICountByUserIdDTO } from '@/dtos/count-by-user-id-dto';
 import { IFindManyByUserIdDTO } from '@/dtos/find-many-by-user-id-dto';
 import { IFindCheckInByUserIdAndDateDTO } from '@/dtos/find-check-in-by-user-id-and-date';
-import { ITENS_PER_PAGE } from '@/utils/constants';
 
 export class InMemoryCheckInRepository implements ICheckInRepository {
   private checkIns: CheckIn[] = [];
@@ -42,5 +43,13 @@ export class InMemoryCheckInRepository implements ICheckInRepository {
     );
 
     return checkIns ?? [];
+  }
+
+  async countByUserId({ user_id }: ICountByUserIdDTO): Promise<number> {
+    const checkIns = this.checkIns.filter(
+      (checkIn) => checkIn.user_id === user_id
+    );
+
+    return checkIns.length;
   }
 }

@@ -25,4 +25,10 @@ export class PrismaCheckInRepository implements ICheckInRepository {
       where: { user_id },
     });
   }
+
+  async countByUserId({ user_id }: IFindManyByUserIdDTO) {
+    return prisma.checkIn.count({
+      where: { user_id },
+    });
+  }
 }
