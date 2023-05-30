@@ -51,5 +51,7 @@ describe('Fetch Nearby Gyms Use Case', () => {
 
     expect(count).toEqual(21);
     expect(gyms.length).toEqual(20);
+    expect(gyms[0]).toEqual(expect.objectContaining(phpGym));
+    expect(gyms[19]).toEqual(expect.objectContaining(jsGym));
   });
 });
