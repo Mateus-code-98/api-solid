@@ -1,13 +1,13 @@
 import { ICheckInRepository } from '@/repositories/check-in-repository/check-in-repository';
 
-interface ICreateGymUseRequest {
+interface IExecute {
   user_id: string;
 }
 
 export class GetUserMetricsUseCase {
   constructor(private checkInRepository: ICheckInRepository) {}
 
-  async execute(data: ICreateGymUseRequest) {
+  async execute(data: IExecute) {
     const checkInsCount = await this.checkInRepository.countByUserId(data);
 
     return { checkInsCount };

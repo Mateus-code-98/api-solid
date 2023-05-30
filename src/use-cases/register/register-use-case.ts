@@ -2,7 +2,7 @@ import { hashSync } from 'bcryptjs';
 import { UserAlreadyExistsError } from '../errors/user-already-exists-error';
 import { IUsersRepository } from '@/repositories/users-repository/users-repository';
 
-interface IRegisterUseCaseRequest {
+interface IExecute {
   name: string;
   email: string;
   password: string;
@@ -11,7 +11,7 @@ interface IRegisterUseCaseRequest {
 export class RegisterUseCase {
   constructor(private userRepository: IUsersRepository) {}
 
-  async execute({ name, email, password }: IRegisterUseCaseRequest) {
+  async execute({ name, email, password }: IExecute) {
     const userWithSameEmail = await this.userRepository.findUserByEmail(email);
 
     if (userWithSameEmail) throw new UserAlreadyExistsError();

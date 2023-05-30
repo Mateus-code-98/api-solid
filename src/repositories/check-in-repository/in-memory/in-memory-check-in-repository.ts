@@ -37,10 +37,13 @@ export class InMemoryCheckInRepository implements ICheckInRepository {
 
   async findManyByUserId({ user_id, page }: IFindManyByUserIdDTO) {
     const start = (page - 1) * ITENS_PER_PAGE;
+    const end = start + ITENS_PER_PAGE;
 
-    const checkIns = this.checkIns.filter(
-      (checkIn, index) => checkIn.user_id === user_id && index >= start
+    const checkInsOfUser = this.checkIns.filter(
+      (checkIn) => checkIn.user_id === user_id
     );
+
+    const checkIns = checkInsOfUser.slice(start, end);
 
     return checkIns ?? [];
   }

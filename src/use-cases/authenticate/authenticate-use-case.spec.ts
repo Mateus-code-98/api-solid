@@ -1,4 +1,4 @@
-import { hash, hashSync } from 'bcryptjs';
+import { hashSync } from 'bcryptjs';
 import { expect, describe, it, beforeEach } from 'vitest';
 import { AuthenticateUseCase } from './authenticate-use-case';
 import { InvalidCredentialsError } from '../errors/invalid-credentials-error';

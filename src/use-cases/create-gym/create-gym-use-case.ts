@@ -1,6 +1,6 @@
 import { IGymsRepository } from '@/repositories/gyms-repository/gyms-repository';
 
-interface ICreateGymUseRequest {
+interface IExecute {
   description: string;
   latitude: number;
   longitude: number;
@@ -11,7 +11,7 @@ interface ICreateGymUseRequest {
 export class CreateGymUseCase {
   constructor(private gymsRepository: IGymsRepository) {}
 
-  async execute(data: ICreateGymUseRequest) {
+  async execute(data: IExecute) {
     const gym = await this.gymsRepository.create(data);
 
     return { gym };

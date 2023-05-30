@@ -5,7 +5,7 @@ import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coor
 import { ICheckInRepository } from '@/repositories/check-in-repository/check-in-repository';
 import { DistanceIsGreaterThenMaxDistanceError } from '../errors/distance-is-greater-than-max-distance-error';
 
-interface ICheckInUseCaseRequest {
+interface IExecute {
   user_id: string;
   gym_id: string;
   userLatitude: number;
@@ -20,12 +20,7 @@ export class CheckInUseCase {
     private gymsRepository: IGymsRepository
   ) {}
 
-  async execute({
-    gym_id,
-    user_id,
-    userLatitude,
-    userLongitude,
-  }: ICheckInUseCaseRequest) {
+  async execute({ gym_id, user_id, userLatitude, userLongitude }: IExecute) {
     const gym = await this.gymsRepository.findById(gym_id);
 
     if (!gym) throw new ResourceNotFoundError();

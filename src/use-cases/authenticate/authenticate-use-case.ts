@@ -2,7 +2,7 @@ import { compareSync } from 'bcryptjs';
 import { InvalidCredentialsError } from '../errors/invalid-credentials-error';
 import { IUsersRepository } from '@/repositories/users-repository/users-repository';
 
-interface IAuthenticateUseCaseRequest {
+interface IExecute {
   email: string;
   password: string;
 }
@@ -10,7 +10,7 @@ interface IAuthenticateUseCaseRequest {
 export class AuthenticateUseCase {
   constructor(private readonly userRepository: IUsersRepository) {}
 
-  async execute({ email, password }: IAuthenticateUseCaseRequest) {
+  async execute({ email, password }: IExecute) {
     const user = await this.userRepository.findUserByEmail(email);
 
     if (!user) throw new InvalidCredentialsError();
