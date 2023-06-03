@@ -48,11 +48,25 @@ export class InMemoryCheckInRepository implements ICheckInRepository {
     return checkIns ?? [];
   }
 
-  async countByUserId({ user_id }: ICountByUserIdDTO): Promise<number> {
+  async countByUserId({ user_id }: ICountByUserIdDTO) {
     const checkIns = this.checkIns.filter(
       (checkIn) => checkIn.user_id === user_id
     );
 
     return checkIns.length;
+  }
+
+  async findById({ id }: { id: string }) {
+    return this.checkIns.find((checkIn) => checkIn.id === id) ?? null;
+  }
+
+  async update(checkIn: CheckIn) {
+    const checkInIndex = this.checkIns.findIndex(
+      (checkIn) => checkIn.id === checkIn.id
+    );
+
+    if (checkInIndex !== -1) this.checkIns[checkInIndex] = checkIn;
+
+    return checkIn;
   }
 }

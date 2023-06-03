@@ -7,11 +7,11 @@ interface IConstructorParams {
 }
 
 export class User {
-  public readonly id: string;
+  public id: string;
   public name: string;
   public email: string;
   public password: string;
-  public readonly created_at: Date;
+  public created_at: Date;
 
   constructor({ email, name, password }: IConstructorParams) {
     this.id = randomUUID();

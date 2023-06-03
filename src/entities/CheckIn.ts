@@ -6,9 +6,9 @@ interface IConstructorParams {
 }
 
 export class CheckIn {
-  public readonly id: string;
-  public readonly created_at: Date;
-  public readonly validated_at: Date | null;
+  public id: string;
+  public created_at: Date;
+  public validated_at: Date | null;
   public user_id: string;
   public gym_id: string;
 

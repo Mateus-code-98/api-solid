@@ -7,6 +7,8 @@ import { IFindCheckInByUserIdAndDateDTO } from '@/dtos/find-check-in-by-user-id-
 export interface ICheckInRepository {
   create(data: ICreateCheckInDTO): Promise<CheckIn>;
   countByUserId(data: ICountByUserIdDTO): Promise<number>;
+  update(data: CheckIn): Promise<CheckIn>;
+  findById(data: { id: string }): Promise<CheckIn | null>;
   findManyByUserId(data: IFindManyByUserIdDTO): Promise<CheckIn[]>;
   findByUserIdAndDate(
     data: IFindCheckInByUserIdAndDateDTO

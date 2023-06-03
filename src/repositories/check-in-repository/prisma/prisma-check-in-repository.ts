@@ -31,4 +31,17 @@ export class PrismaCheckInRepository implements ICheckInRepository {
       where: { user_id },
     });
   }
+
+  async findById({ id }: { id: string }) {
+    return prisma.checkIn.findFirst({
+      where: { id },
+    });
+  }
+
+  async update(data: CheckIn) {
+    return prisma.checkIn.update({
+      where: { id: data.id },
+      data,
+    });
+  }
 }

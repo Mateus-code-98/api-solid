@@ -9,13 +9,13 @@ interface IConstructorParams {
 }
 
 export class Gym {
-  public readonly id: string;
+  public id: string;
   public title: string;
   public description: string;
   public phone: string;
   public latitude: number;
   public longitude: number;
-  public readonly created_at: Date;
+  public created_at: Date;
 
   constructor({
     description,
