@@ -31,8 +31,8 @@ export class InMemoryGymsRepository implements IGymsRepository {
 
     const gyms = this.gyms.filter((gym, index) => {
       const gymMatched = attrToCompare.find((field) => {
-        const valueOfAttr = gym[field].toString().toLowerCase();
-        return valueOfAttr.includes(search.toLowerCase());
+        const valueOfAttr = gym[field]?.toString().toLowerCase();
+        return valueOfAttr?.includes(search.toLowerCase());
       });
 
       return gymMatched && index >= start;

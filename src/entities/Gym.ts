@@ -2,8 +2,8 @@ import { randomUUID } from 'crypto';
 
 interface IConstructorParams {
   title: string;
-  description: string;
-  phone: string;
+  description?: string | null;
+  phone?: string | null;
   latitude: number;
   longitude: number;
 }
@@ -11,8 +11,8 @@ interface IConstructorParams {
 export class Gym {
   public id: string;
   public title: string;
-  public description: string;
-  public phone: string;
+  public description?: string | null;
+  public phone?: string | null;
   public latitude: number;
   public longitude: number;
   public created_at: Date;

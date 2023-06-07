@@ -11,7 +11,10 @@
     "docker:up": "docker-compose up -d",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:pull": "prisma db pull"
   },
   "keywords": [],
   "author": "",

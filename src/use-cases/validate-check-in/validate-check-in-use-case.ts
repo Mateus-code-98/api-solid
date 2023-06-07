@@ -8,7 +8,7 @@ interface IExecute {
   check_in_id: string;
 }
 
-export class ValidateCheckInInUseCase {
+export class ValidateCheckInUseCase {
   constructor(private checkInRepository: ICheckInRepository) {}
 
   async execute({ check_in_id }: IExecute) {
@@ -31,6 +31,8 @@ export class ValidateCheckInInUseCase {
     }
 
     checkIn.validated_at = new Date();
+
+    await this.checkInRepository.update(checkIn);
 
     return { checkIn };
   }

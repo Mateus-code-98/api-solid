@@ -1,6 +1,6 @@
 import { Gym } from '@/entities/Gym';
 import { expect, describe, it, beforeEach } from 'vitest';
-import { FetchUserCheckInsHistoryUseCase } from './fetch-user-check-ins-history';
+import { FetchUserCheckInsHistoryUseCase } from './fetch-user-check-ins-history-use-case';
 import { ICheckInRepository } from '@/repositories/check-in-repository/check-in-repository';
 import { InMemoryCheckInRepository } from '@/repositories/check-in-repository/in-memory/in-memory-check-in-repository';
 

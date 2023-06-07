@@ -1,8 +1,8 @@
 import { randomUUID } from 'crypto';
 import { Gym } from '@/entities/Gym';
 import { User } from '@prisma/client';
+import { ValidateCheckInUseCase } from './validate-check-in-use-case';
 import { CheckInExpiredError } from '../errors/check-in-expired-error';
-import { ValidateCheckInInUseCase } from './validate-check-in-use-case';
 import { expect, describe, it, beforeEach, vi, afterEach } from 'vitest';
 import { ResourceNotFoundError } from '../errors/resource-not-found-error';
 import { MILLISSECONDS_TO_VALIDATE_CHECK_IN } from '../../utils/constants';
@@ -16,7 +16,7 @@ import { InMemoryCheckInRepository } from '@/repositories/check-in-repository/in
 let checkInRepository: ICheckInRepository;
 let gymsRepository: IGymsRepository;
 let usersRepository: IUsersRepository;
-let useCase: ValidateCheckInInUseCase;
+let useCase: ValidateCheckInUseCase;
 let gym: Gym;
 let user: User;
 
@@ -26,7 +26,7 @@ describe('GetUserProfile Use Case', () => {
     gymsRepository = new InMemoryGymsRepository();
     usersRepository = new InMemoryUsersRepository();
 
-    useCase = new ValidateCheckInInUseCase(checkInRepository);
+    useCase = new ValidateCheckInUseCase(checkInRepository);
 
     gym = await gymsRepository.create({
       description: 'A JavaScript Gym',
