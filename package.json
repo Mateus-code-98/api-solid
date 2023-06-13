@@ -4,7 +4,7 @@
   "description": "GymPass style app.",
   "main": "index.js",
   "scripts": {
-    "start:dev": "yarn docker:up && tsx watch src/server.ts",
+    "dev": "yarn docker:up && tsx watch src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src --out-dir build",
     "docker:down": "docker-compose down",
@@ -23,6 +23,7 @@
     "@rocketseat/eslint-config": "1.2.0",
     "@types/cors": "2.8.13",
     "@types/express": "4.17.17",
+    "@types/jsonwebtoken": "9.0.2",
     "@types/node": "20.2.1",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@vitest/coverage-c8": "0.31.1",
@@ -50,6 +51,7 @@
     "express": "4.18.2",
     "express-async-errors": "3.1.1",
     "http": "0.0.1-security",
+    "jsonwebtoken": "9.0.0",
     "sequelize": "6.31.1",
     "zod": "3.21.4"
   }
